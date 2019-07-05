@@ -46,7 +46,7 @@ router.post('/',
     let user = await User.findOne({ email });
 
     if(!user) {
-    	 return res.status(400).json({error:[{msg:'Invalid Credentials'}]});
+    	 return res.status(400).json({errors:[{msg:'Invalid Credentials'}]});
     }
 
     
@@ -54,7 +54,7 @@ router.post('/',
 
 
     if(!isMatch) {
-    	 return res.status(400).json({error:[{msg:'Invalid Credentials'}]});
+    	 return res.status(400).json({errors:[{msg:'Invalid Credentials'}]});
     }
     
     const payload = {
