@@ -1,16 +1,34 @@
-import React from 'react'
+import React,{useEffect,Fragment} from 'react'
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
+import {Link} from 'react-router-dom';
+import Spinner from '../layouts/Spinner.js';
+import DashBoardActions from './DashBoardActions';
 import {getCurrentProfile} from '../../actions/profile'
 
-const DashBoard = ({getCurrentProfile}) => {
-     return (
+const DashBoard = ({getCurrentProfile,auth:{user},profile:{loading,profile}}) => {
+     
+    useEffect(() => {
+    	getCurrentProfile()
+    },[])
 
-       <div>
-         DashBoard
-       </div>  
 
-     	)
+     return loading && profile === null ? <Spinner /> : <Fragment>
+       <h1 className='large text-primary'>Dashboard</h1>
+       <p className='lead'>
+        <i className='fas fa-user' /> Welcome {user && user.name}
+       </p>
+       {profile !== null ? (<Fragment> <DashBoardActions /> </Fragment>) : 
+
+
+        (<Fragment>
+          
+          <p>You have not yet setup your profile, please click below to setup your profile</p>
+          <Link to='/create-profile' className='btn btn-primary my-1'>
+          Create profile
+          </Link>
+        </Fragment>)}
+     </Fragment>
 	}
 
 DashBoard.propTypes = {
