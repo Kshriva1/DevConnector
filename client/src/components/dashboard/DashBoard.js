@@ -5,8 +5,11 @@ import {Link} from 'react-router-dom';
 import Spinner from '../layouts/Spinner.js';
 import DashBoardActions from './DashBoardActions';
 import {getCurrentProfile} from '../../actions/profile'
+import Experience from './Experience';
+import Education from './Education';
+import {deleteAccount} from '../../actions/profile';
 
-const DashBoard = ({getCurrentProfile,auth:{user},profile:{loading,profile}}) => {
+const DashBoard = ({getCurrentProfile,auth:{user},profile:{loading,profile},deleteAccount}) => {
      
     useEffect(() => {
     	getCurrentProfile()
@@ -18,7 +21,19 @@ const DashBoard = ({getCurrentProfile,auth:{user},profile:{loading,profile}}) =>
        <p className='lead'>
         <i className='fas fa-user' /> Welcome {user && user.name}
        </p>
-       {profile !== null ? (<Fragment> <DashBoardActions /> </Fragment>) : 
+       {profile !== null ? (
+
+        <Fragment> 
+        <DashBoardActions /> 
+        <Experience experience={profile.experience} />
+        <Education education={profile.education} />
+
+        <div className="my-2">
+         <button className="btn btn-danger" onClick={e=>deleteAccount()}>
+         <i className="fas fa-user-minus"></i> Delete my Account
+         </button>
+        </div>
+        </Fragment>) : 
 
 
         (<Fragment>
@@ -33,6 +48,7 @@ const DashBoard = ({getCurrentProfile,auth:{user},profile:{loading,profile}}) =>
 
 DashBoard.propTypes = {
   getCurrentProfile: PropTypes.func.isRequired,
+  deleteAccount: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
   profile: PropTypes.object.isRequired
 }	
@@ -42,4 +58,4 @@ const mapStateToProps = state => ({
      profile: state.profile
 })
 
-export default connect(mapStateToProps,{getCurrentProfile})(DashBoard);	
+export default connect(mapStateToProps,{getCurrentProfile,deleteAccount})(DashBoard);	
