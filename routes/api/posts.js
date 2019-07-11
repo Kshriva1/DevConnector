@@ -29,7 +29,7 @@ try{
 	user: req.user.id
 });
 
-const post = await newPost.save();
+ await newPost.save();
 res.json(newPost);
 
 }catch(err) {
@@ -196,7 +196,7 @@ router.delete('/comment/:id/:comment_id',auth,async(req,res) => {
          	return res.status(400).json({msg:'Comment not found'})
          }
 
-         if(post.user.toString() != req.user.id) {
+         if(comment.user.toString() != req.user.id) {
          	return res.status(401).json({msg:'User is not authorized'})
          }
 
