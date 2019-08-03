@@ -20,4 +20,4 @@ This application consists of the following functionalities:
 
 (8) It also displays a NotFound page it is redirected to any page which it cannot find.
 
-This application can be viewed at https://invulnerable-livre-75833.herokuapp.com
+This application can be viewed at https://shielded-eyrie-87943.herokuapp.com
