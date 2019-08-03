@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
 
 export const ProfileTop = ({profile:{status,company,location,website,social,user:{name,avatar}}}) => {
 	return(
@@ -73,7 +72,7 @@ export const ProfileTop = ({profile:{status,company,location,website,social,user
 }
 
 ProfileTop.propTypes = {
- profile: PropTypes.func.isRequired
+ profile: PropTypes.object.isRequired
 }
 
 export default ProfileTop;

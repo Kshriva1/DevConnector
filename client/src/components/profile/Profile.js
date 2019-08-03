@@ -12,7 +12,6 @@ import {getProfileById} from '../../actions/profile';
 
 
 const Profile = ({getProfileById,profile:{profile,loading},auth,match}) => {
-	console.log(match.params.id)
 
 	useEffect(() => {
       getProfileById(match.params.id)
@@ -26,7 +25,7 @@ const Profile = ({getProfileById,profile:{profile,loading},auth,match}) => {
            </Link>
            {auth.isAuthenticated && auth.loading===false && auth.user._id === profile.user._id 
            	&& (<Link to='/edit-profile' className='btn btn-dark'>Edit Profile</Link>)}
-           	      <div class="profile-grid my-1">
+           	      <div className="profile-grid my-1">
                     <ProfileTop profile={profile} />
                     <ProfileAbout profile={profile} />
                     <div className='profile-exp bg-white p-2'>
